@@ -1,0 +1,112 @@
+<apex:page controller="DaddyAnalyticsInsertCustomSettings">
+<script type="text/javascript">
+    function onlyNumbers(evt){
+           var e = evt
+           if(window.event){ // IE 
+               var charCode = e.keyCode;
+           }    
+           else if (e.which) { // Safari 4, Firefox 3.0.4
+               var charCode = e.which
+           }
+           if (charCode > 31 && (charCode < 48 || charCode > 57))
+           return false;
+           return true;
+       }
+       
+      
+</script>
+
+    <apex:outputPanel >
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:20px;" value="Daddy Analytics Settings"></apex:outputLabel>
+                </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <apex:form >
+    <apex:outputPanel rendered="{!showSuccess}">
+        <table width="100%"  border="0" >
+        <tr>
+            <th height="30px" style="color:Black;vertical-align: middle;left=5px;background-color:Yellow;">
+               <center> <apex:outputText style="width:100px;">Your Settings have been saved</apex:outputText></center>
+            </th>
+            </tr>
+            </table>
+    </apex:outputPanel>
+    
+    <apex:outputPanel rendered="{!showError}">
+        <table width="100%"  border="0" >
+        <tr>
+            <th height="30px" style="color:Black;vertical-align: middle;left=5px;background-color:#d15b46;">
+               <center> <apex:outputText style="width:100px;">Your Settings were not saved</apex:outputText></center>
+            </th>
+            </tr>
+            </table>
+    </apex:outputPanel>
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Please enter your Daddy Analytics Settings and your website URL" columns="1" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Daddy Analytics Site ID : "></apex:outputLabel>
+                <apex:inputText value="{!SiteId}" maxlength="11"  />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Daddy Analytics API Key : "></apex:outputLabel>
+                <apex:outputPanel >
+                <!-- <apex:outputPanel styleClass="requiredInput" layout="block" style="position:relative;left:2px;"> 
+                                <apex:outputPanel styleClass="requiredBlock" layout="block"/> -->
+                <apex:inputSecret value="{!APIKey}" maxlength="16" redisplay="true"  />
+                
+                <!-- <apex:inputSecret value="{!APIKey}" readonly="true" maxlength="15" redisplay="true"  rendered="{!showPassword}"/> -->
+                <!--</apex:outputPanel>-->
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Your Website URL : "></apex:outputLabel>
+                <apex:inputText value="{!WebSiteURL}"  style="width:450px;"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Your Web-to-Lead Test Page  : "></apex:outputLabel>
+                <apex:inputText value="{!PageURL}" style="width:450px;"/>
+            </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Daddy Analytics License Key : "></apex:outputLabel>
+                <apex:inputText value="{!licenseKey}" style="width:450px;"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="License Type : "></apex:outputLabel>
+                	<apex:outputText value="{!licenseTypeValue}" style="width:100px;">
+                	</apex:outputText>
+            </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+                <apex:outputLabel value="License Expiry Date : "></apex:outputLabel>
+                	<apex:outputText value="{0,date,dd'/'MM'/'yyyy HH:mm:ss}" style="width:100px;">
+                	<apex:param value="{!licenseEndDate}" />
+               		</apex:outputText>	
+            </apex:pageBlockSectionItem>
+        
+        </apex:pageBlockSection>
+        <apex:outputPanel rendered="{!showError}">
+        <table width="100%"  border="0" >
+        <tr>
+            <th height="30px" >
+               <center><apex:messages styleClass="errorMsg" style="list-style-type: none;font-family:georgia,garamond,serif;"  /></center>
+            </th>
+            </tr>
+            </table>
+    </apex:outputPanel>
+    
+        <center>
+            <apex:commandbutton value="Submit" action="{!Submit}"/>
+        </center>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

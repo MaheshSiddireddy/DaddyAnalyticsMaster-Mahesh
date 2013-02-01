@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>DA_API_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>DA API Key</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_License_End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>DA_License_End_Date</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DA_License_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>DA License Key</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_License_Type_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>DA_License_Type_Value</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_License_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>DA License Type</label>
+        <length>5</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_Private_Key__c</fullName>
+        <externalId>false</externalId>
+        <label>DA Private Key</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_Site_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>DA Site ID</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_Stats_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>DA Stats URL</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_Test_Page_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>DA Test Page URL</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DA_Website_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>DA Website URL</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Daddy Analytics</label>
+</CustomObject>

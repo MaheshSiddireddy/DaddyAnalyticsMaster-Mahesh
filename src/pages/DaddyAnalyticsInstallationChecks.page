@@ -1,0 +1,342 @@
+<apex:page controller="DaddyAnalyticsInstallationChecks">
+<!-- 
+<apex:image value="{!$Resource.successimg}" width="20px" height="20px"/>
+<apex:image value="/img/msg_icons/error16.png" width="20px" height="20px"/>
+ -->
+<apex:form >
+<apex:panelgrid columns="1">
+    <apex:outputPanel >
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:20px;" value="Daddy Analytics Setup Checklist"></apex:outputLabel>
+                </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+
+    <apex:pageBlock title="Following this checklist will help you get Daddy Analytics Setup Quickly and Easily">
+    <!-- Example 0 -->
+    <apex:outputPanel >
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Daddy Analytics Installed and up-to-date."></apex:outputLabel>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png" />
+                </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 1 -->
+    <apex:outputPanel >
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Valid Daddy Analytics license key entered."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"   rendered="{!!showEx1}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx1}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx1}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Please enter a valid Daddy Analytics license Key."></apex:outputLabel>
+                <apex:commandlink rendered="{!!showEx1}" value="Click Here" style="font-family:Lucida Sans Unicode;font-size:15px;color:blue;" action="/apex/DaddyAnalytics__DaddyAnalyticsInsertCustomSettings"></apex:commandlink>
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    
+    
+    <!-- Example 2 -->
+    <apex:outputPanel rendered="{!if(showEx1,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Analytics Site ID, API key, and website URL entered into Salesforce Custom Settings."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"   rendered="{!!showEx22}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx22}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx22}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="There are missing values in the Custom Settings for Daddy Analytics."></apex:outputLabel>
+                <apex:commandlink rendered="{!!showEx22}" value="Click Here" style="font-family:Lucida Sans Unicode;font-size:15px;color:blue;" action="/apex/DaddyAnalytics__DaddyAnalyticsInsertCustomSettings"></apex:commandlink>
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 3 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Remote Sites configured with Daddy Analytics URL."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"  rendered="{!!showEx2}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx2}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx2}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Please check your "></apex:outputLabel>
+                <apex:commandlink rendered="{!!showEx2}" value="Remote Site Settings" style="font-family:Lucida Sans Unicode;font-size:15px;color:blue;" action="/0rp?spl1=1&setupid=SecurityRemoteProxy&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DSecurity"></apex:commandlink>
+                <apex:outputLabel rendered="{!!showEx2}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value=". There is no valid entry for Daddy Analytics. The format should be 'http://stats.daddyanalytics.com'."></apex:outputLabel>
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 4 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Remote Sites configured with your Website URL and Test Page URL."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"   rendered="{!!showEx3}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx3}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputText rendered="{!if(!showEx3 && showEx31 && showEx32, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Please enter your Website URL '{!WebsiteURL}' and Test Page URL '{!TestPageURL}' into "></apex:outputText>
+                <apex:outputText rendered="{!if(!showEx3 && !showEx31 && showEx32, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Please enter your Website URL '{!WebsiteURL}' into "></apex:outputText>
+                <apex:outputText rendered="{!if(!showEx3 && showEx31 && !showEx32, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Please enter your Test Page URL '{!TestPageURL}' into "></apex:outputText>
+                <apex:commandlink rendered="{!!showEx3}" value="Remote Site Settings. " style="font-family:Lucida Sans Unicode;font-size:15px;color:Blue;" action="/0rp?spl1=1&setupid=SecurityRemoteProxy&retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DSecurity"></apex:commandlink>            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 5 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Valid and current Daddy Analytics Account."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"  rendered="{!!showEx4}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx4}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputText rendered="{!!showEx4}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="Either your Daddy Analytics site key and api key are incorrect, or your account is no longer active. Please check your "></apex:outputText>
+                <apex:commandlink rendered="{!!showEx4}" value="Custom Settings" style="font-family:Lucida Sans Unicode;font-size:15px;color:Blue;" action="/apex/DaddyAnalytics__DaddyAnalyticsInsertCustomSettings"></apex:commandlink>
+                <apex:outputText rendered="{!!showEx4}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value=", and if everything there looks correct, contact Daddy Analytics Support."></apex:outputText>
+                
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 6 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Website tracking code installed on your website."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"   rendered="{!!showEx9}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx9}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputText rendered="{!if(!showEx9 && !showEx99 && !showEx991, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="We could not find a valid website tracking code on your website. We found a valid website tracking code on your website, but the Site ID listed in it does not match the
+Site ID in your Custom Settings"></apex:outputText>
+<apex:outputText rendered="{!if(!showEx9 && showEx99 && !showEx991, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="We found a valid website tracking code on your website, but the Site ID listed in it does not match the
+Site ID in your Custom Settings"></apex:outputText>
+<apex:outputText rendered="{!if(!showEx9 && !showEx99 && showEx991, true, false)}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="We could not find a valid website tracking code on your website. "></apex:outputText>
+                
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 7 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Website visitor action recorded in the last 24 hours."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/warning16.png"   rendered="{!!showEx6}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx6}"/>
+                    
+                </td>
+            </tr>
+            
+            <tr>
+            <td colspan="2">
+                <apex:outputText rendered="{!!showEx6}" style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" value="No visitor actions have been recorded in the last 24 hours. This may be because your site has not gone live, or may mean that something is not configured correctly.
+Please contact support if you expected to have traffic (traffic results can be delayed up to 10 minutes)."></apex:outputText>
+                
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 8 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Website recording incoming Campaign links in last 7 days."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/warning16.png"   rendered="{!!showEx7}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx7}"/>
+                    
+                </td>
+            </tr>
+            
+            <tr>
+            <td colspan="2">
+                <apex:outputText rendered="{!!showEx7}" style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" value="You may be getting this warning because you have not tagged incoming links. There is no need to do this, however adwords tracking, and other marketing / campaign tracking will not work until you tag incoming links. See"></apex:outputText>
+              <!--   <apex:commandlink rendered="{!!showEx7}" value="Google URL Builder" style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" action="http://support.google.com/analytics/bin/answer.py?hl=en&answer=1033867"/> -->
+              <apex:outputPanel rendered="{!!showEx7}">
+              <a style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" href="http://support.google.com/analytics/bin/answer.py?hl=en&answer=1033867">Google URL Builder</a>
+              </apex:outputPanel>
+                <apex:outputText rendered="{!!showEx7}" style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" value=" for more information. Please note, you do not have to use Google Adwords, this URL builder will work with Bing, Doubleclick, etc."></apex:outputText>
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 9 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9 ,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Web-to-Lead test URL entered into Custom Settings."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"  rendered="{!!showEx8}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx8}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx8}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="There are missing values in the Custom Settings for Daddy Analytics."></apex:outputLabel>
+                <apex:commandlink rendered="{!!showEx8}" value="Click Here" style="font-family:Lucida Sans Unicode;font-size:15px;color:blue;" action="/apex/DaddyAnalytics__DaddyAnalyticsInsertCustomSettings"></apex:commandlink>
+            
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 10 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9  && showEx8,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Javascript Code installed into Web-to-Lead page."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"   rendered="{!!showEx10}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx10}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx10}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="We could not find our Javascript code on your web-to-lead form. Please check to make sure you have the correct Web-to-Lead test page URL in your "></apex:outputLabel>
+                <apex:commandlink rendered="{!!showEx10}" value="Custom Settings" style="font-family:Lucida Sans Unicode;font-size:15px;color:Blue;" action="/apex/DaddyAnalytics__DaddyAnalyticsInsertCustomSettings"></apex:commandlink>
+                <apex:outputLabel rendered="{!!showEx10}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" value="and that your Web-to-Lead page has our Javascript installed."></apex:outputLabel>
+                
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 11 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9  && showEx8 && showEx10,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Javascript Code configured for your Salesforce org."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/error16.png"  rendered="{!!showEx1111}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx1111}"/>
+                    
+                </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx1111}" style="font-family:Lucida Sans Unicode;font-size:15px;color:red;" 
+                value="The Javascript code appears to be installed, but the Salesforce ID of our tracking code field has not been pasted into the code. 
+                Please see this youtube video to review the installation."></apex:outputLabel>
+                
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 12 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9  && showEx8 && showEx10,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:15px;" value="Javascript Code debugging comments hidden from users."></apex:outputLabel>
+                    &nbsp;<apex:image value="/img/msg_icons/warning16.png"   rendered="{!!showEx1212}"/>
+                </td>
+                <td style="padding-left:5px; vertical-align:middle">                    
+                    <apex:image value="/img/msg_icons/confirm16.png"  rendered="{!showEx1212}"/>    
+                </td>
+            </tr>
+            
+            <tr>
+            <td colspan="2">
+                <apex:outputLabel rendered="{!!showEx1212}" style="font-family:Lucida Sans Unicode;font-size:10px;color:#660000;" value="While the app will function, your website visitors may see debugging information on the website. Please comment out or delete the debugging code, which is in the javascript/html on your website (you cannot control this from within Salesforce)."></apex:outputLabel>
+                
+            </td>
+            </tr>
+        </table>
+    </apex:outputPanel>
+    
+    <!-- Example 13 -->
+    <apex:outputPanel rendered="{!if(showEx1 && showEx22 && showEx2 && showEx3 && showEx4 && showEx9  && showEx8 && showEx10,true,false)}">
+        <table>
+            <tr>
+                <td style="padding-left:5px; vertical-align:middle">
+                    <apex:outputLabel style="font-family:Lucida Sans Unicode;font-size:24px;" value="It appears your app is configured properly!"></apex:outputLabel>
+                </td>
+                
+            </tr>
+        </table>
+    </apex:outputPanel>
+    </apex:pageBlock>
+
+</apex:panelgrid>
+</apex:form>
+</apex:page>
